@@ -1,32 +1,28 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/user/index",
-    "pages/login/index",
-    "pages/register/index"
+    "pages/city-select/index",
+    "pages/user/index"
   ],
   "window": {
-    "defaultTitle": "摩托车租赁",
-    "titleBarColor": "#108ee9",
-    "backgroundColor": "#F7F7F7"
+    "defaultTitle": "摩托车租赁"
   },
   "tabBar": {
-    "textColor": "#404040",
-    "selectedColor": "#108ee9",
-    "backgroundColor": "#fff",
-    "tabBarTextStyle": {
-      "fontSize": "20px"
-    },
+    "textColor": "#999999",
+    "selectedColor": "#2B85E4",
+    "backgroundColor": "#ffffff",
     "items": [
       {
         "pagePath": "pages/index/index",
-        "name": "页"
-      
-      
+        "name": "首页",
+        "icon": "assets/icons/home.png",
+        "activeIcon": "assets/icons/home-active.png"
       },
       {
         "pagePath": "pages/user/index",
-        "name": "我的"
+        "name": "我的",
+        "icon": "assets/icons/user.png",
+        "activeIcon": "assets/icons/user-active.png"
       }
     ]
   },

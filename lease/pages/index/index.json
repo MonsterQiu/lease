@@ -1,3 +1,5 @@
 {
-  "defaultTitle": "摩托车租赁"
+  "defaultTitle": "摩托车租赁",
+  "pullRefresh": true,
+  "allowsBounceVertical": "YES"
 }

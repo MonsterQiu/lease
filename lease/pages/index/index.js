@@ -2,59 +2,30 @@ const app = getApp();
 
 Page({
   data: {
-    currentCity: '定位中...',
+    currentCity: '',
+    locationCity: '',
     searchValue: '',
     banners: [
-      { id: 1, imageUrl: '/assets/banner1.jpg', link: '/pages/activity/index' },
-      { id: 2, imageUrl: '/assets/banner2.jpg', link: '/pages/activity/index' },
-      { id: 3, imageUrl: '/assets/banner3.jpg', link: '/pages/activity/index' }
+      { id: 1, image: '/assets/images/banner1.png' },
+      { id: 2, image: '/assets/images/banner2.png' },
+      { id: 3, image: '/assets/images/banner3.png' }
     ],
-    quickActions: [
-      { type: 'nearby', name: '附近店铺', icon: '/assets/icons/nearby.png' },
-      { type: 'brand', name: '品牌专区', icon: '/assets/icons/brand.png' },
-      { type: 'activity', name: '特惠活动', icon: '/assets/icons/activity.png' },
-      { type: 'new', name: '新车上市', icon: '/assets/icons/new.png' }
+    quickNav: [
+      { id: 1, icon: '/assets/icons/nav1.png', text: '附近门店' },
+      { id: 2, icon: '/assets/icons/nav2.png', text: '特惠活动' },
+      { id: 3, icon: '/assets/icons/nav3.png', text: '品牌专区' },
+      { id: 4, icon: '/assets/icons/nav4.png', text: '骑行攻略' }
     ],
-    recommendShops: [
-      {
-        id: 1,
-        name: '摩托之家',
-        logo: '/assets/shop1.jpg',
-        distance: 1.2,
-        rating: 4.8,
-        tags: ['优质商家', '品牌店', '服务好']
-      },
-      {
-        id: 2,
-        name: '机车部落',
-        logo: '/assets/shop2.jpg',
-        distance: 2.5,
-        rating: 4.6,
-        tags: ['老店', '车型多', '价格实惠']
-      }
-    ],
-    hotModels: [
-      {
-        id: 1,
-        name: '本田 CB300R',
-        image: '/assets/model1.jpg',
-        price: 199,
-        shopCount: 12
-      },
-      {
-        id: 2,
-        name: '川崎 Ninja 400',
-        image: '/assets/model2.jpg',
-        price: 299,
-        shopCount: 8
-      }
-    ]
+    shops: [],
+    models: [],
+    loading: false
   },
 
   onLoad() {
     // 设置当前城市
     this.setData({
-      currentCity: app.globalData.currentCity
+      currentCity: app.globalData.currentCity || '定位中...',
+      locationCity: app.globalData.locationCity || '定位中...'
     });
 
     // 监听城市变化
@@ -77,28 +48,103 @@ Page({
     }
   },
 
-  // 加载页面数据
-  async loadPageData() {
-    try {
-      // TODO: 调用后端API获取数据
-      // const res = await my.request({
-      //   url: 'your-api-endpoint',
-      //   method: 'GET'
-      // });
-      // this.setData({
-      //   banners: res.data.banners,
-      //   recommendShops: res.data.shops,
-      //   hotModels: res.data.models
-      // });
-    } catch (error) {
-      console.error('加载数据失败:', error);
-    }
+  // 下拉刷新监听
+  onPullDownRefresh() {
+    this.loadPageData(() => {
+      my.stopPullDownRefresh();
+    });
   },
 
-  // 选择城市
-  onSelectCity() {
+  // 加载页面数据
+  loadPageData(callback) {
+    this.setData({ loading: true });
+    
+    // 模拟获取推荐商家数据
+    const mockShops = [
+      {
+        id: 1,
+        name: '老王摩托车行',
+        address: '杭州市西湖区文三路 108 号',
+        distance: '1.2km',
+        rating: 4.8,
+        image: '/assets/images/shop1.png'
+      },
+      {
+        id: 2,
+        name: '速达摩托',
+        address: '杭州市拱墅区莫干山路 1000 号',
+        distance: '2.5km',
+        rating: 4.6,
+        image: '/assets/images/shop2.png'
+      }
+    ];
+
+    // 模拟获取热门车型数据
+    const mockModels = [
+      {
+        id: 1,
+        name: '春风 400NK',
+        price: '288',
+        image: '/assets/images/model1.png'
+      },
+      {
+        id: 2,
+        name: '本田 CBR300R',
+        price: '328',
+        image: '/assets/images/model2.png'
+      }
+    ];
+
+    // 模拟网络请求延迟
+    setTimeout(() => {
+      this.setData({
+        shops: mockShops,
+        models: mockModels,
+        loading: false
+      });
+      
+      // 如果有回调函数则执行
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }, 1000);
+  },
+
+  // 点击城市
+  onCityTap() {
     my.navigateTo({
       url: '/pages/city-select/index'
+    });
+  },
+
+  // 搜索栏点击
+  onSearchTap() {
+    my.showToast({
+      content: '搜索功能开发中'
+    });
+  },
+
+  // 快捷导航点击
+  onQuickNavTap(e) {
+    const { id } = e.currentTarget.dataset;
+    my.showToast({
+      content: '功能开发中'
+    });
+  },
+
+  // 店铺点击
+  onShopTap(e) {
+    const { id } = e.currentTarget.dataset;
+    my.showToast({
+      content: '店铺详情开发中'
+    });
+  },
+
+  // 车型点击
+  onModelTap(e) {
+    const { id } = e.currentTarget.dataset;
+    my.showToast({
+      content: '车型详情开发中'
     });
   },
 
@@ -119,41 +165,6 @@ Page({
     const { item } = e.target.dataset;
     my.navigateTo({
       url: item.link
-    });
-  },
-
-  // 快捷功能点击
-  onQuickActionTap(e) {
-    const { type } = e.target.dataset;
-    switch (type) {
-      case 'nearby':
-        my.navigateTo({ url: '/pages/nearby-shops/index' });
-        break;
-      case 'brand':
-        my.navigateTo({ url: '/pages/brand/index' });
-        break;
-      case 'activity':
-        my.navigateTo({ url: '/pages/activity/index' });
-        break;
-      case 'new':
-        my.navigateTo({ url: '/pages/new-models/index' });
-        break;
-    }
-  },
-
-  // 店铺点击
-  onShopTap(e) {
-    const { id } = e.target.dataset;
-    my.navigateTo({
-      url: `/pages/shop-detail/index?id=${id}`
-    });
-  },
-
-  // 车型点击
-  onModelTap(e) {
-    const { id } = e.target.dataset;
-    my.navigateTo({
-      url: `/pages/model-detail/index?id=${id}`
     });
   },
 
@@ -182,9 +193,6 @@ Page({
   },
   onTitleClick() {
     // 标题被点击
-  },
-  onPullDownRefresh() {
-    // 页面被下拉
   },
   onReachBottom() {
     // 页面被拉到底部
