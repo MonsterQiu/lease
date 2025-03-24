@@ -1,0 +1,9 @@
+<!-- custom-tabbar.axml -->
+<view class="tab-bar">
+  <view class="tab-item" onTap="switchTab" data-path="pages/index/index">
+    <text class="tab-text">首页</text>
+  </view>
+  <view class="tab-item" onTap="switchTab" data-path="pages/user/index">
+    <text class="tab-text">我的</text>
+  </view>
+</view>

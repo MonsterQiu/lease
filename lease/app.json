@@ -1,14 +1,44 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/user/index",
+    "pages/login/index",
+    "pages/register/index"
   ],
   "window": {
-    "defaultTitle": "My App"
+    "defaultTitle": "摩托车租赁",
+    "titleBarColor": "#108ee9",
+    "backgroundColor": "#F7F7F7"
+  },
+  "tabBar": {
+    "textColor": "#404040",
+    "selectedColor": "#108ee9",
+    "backgroundColor": "#fff",
+    "tabBarTextStyle": {
+      "fontSize": "20px"
+    },
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "页"
+      
+      
+      },
+      {
+        "pagePath": "pages/user/index",
+        "name": "我的"
+      }
+    ]
   },
   "behavior": {
     "requestReferrerStrategy": "page",
     "requestReferrerStyle": "full",
     "requestDefaultEnableCookie": true,
     "connectSocketDefaultMultiple": true
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于查找附近的摩托车租赁店铺"
+    }
   }
 }

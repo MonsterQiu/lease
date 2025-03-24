@@ -1,0 +1,19 @@
+/* custom-tabbar.acss */
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    height: 96rpx;
+  }
+  .tab-item {
+    text-align: center;
+    width: 100%;
+  }
+  .tab-text {
+    font-size: 20px;
+    color: #404040;
+  }
+  .tab-item.selected .tab-text {
+    color: #108ee9;
+  }
+  

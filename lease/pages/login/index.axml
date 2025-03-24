@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="header">
+    <image class="logo" src="/assets/logo.png" mode="aspectFit" />
+    <text class="title">摩托车租赁</text>
+  </view>
+
+  <view class="auth-button">
+    <button type="primary" onTap="onAuthLogin">支付宝账号登录</button>
+  </view>
+
+  <view class="agreement">
+    <checkbox value="{{isAgree}}" onChange="onAgreeChange" />
+    <text class="agreement-text">登录即代表您已同意</text>
+    <text class="link" onTap="onShowUserAgreement">《用户协议》</text>
+    <text class="agreement-text">和</text>
+    <text class="link" onTap="onShowPrivacyPolicy">《隐私政策》</text>
+  </view>
+</view> 

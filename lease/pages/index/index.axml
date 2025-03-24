@@ -1,4 +1,78 @@
+<view class="container">
+  <!-- 顶部搜索区域 -->
+  <view class="search-section">
+    <view class="location" onTap="onSelectCity">
+      <text>{{currentCity}}</text>
+      <icon type="arrow-down" size="12" color="#666"/>
+    </view>
+    <view class="search-box">
+      <icon type="search" size="16" color="#999"/>
+      <input 
+        class="search-input"
+        value="{{searchValue}}"
+        placeholder="搜索车型或店铺"
+        onInput="onSearch"
+        onClear="onClear"
+      />
+    </view>
+  </view>
 
-<view>
-  this is a blank page
+  <!-- 轮播图 -->
+  <swiper class="banner" indicator-dots autoplay circular>
+    <swiper-item a:for="{{banners}}">
+      <image src="{{item.imageUrl}}" mode="aspectFill" onTap="onBannerTap" data-item="{{item}}"/>
+    </swiper-item>
+  </swiper>
+
+  <!-- 快捷功能区 -->
+  <view class="quick-actions">
+    <view class="action-item" a:for="{{quickActions}}" onTap="onQuickActionTap" data-type="{{item.type}}">
+      <image src="{{item.icon}}" mode="aspectFit"/>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐店铺 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="title">推荐店铺</text>
+      <text class="more" onTap="onMoreShops">更多</text>
+    </view>
+    <view class="shop-list">
+      <view class="shop-card" a:for="{{recommendShops}}" onTap="onShopTap" data-id="{{item.id}}">
+        <image class="shop-logo" src="{{item.logo}}" mode="aspectFill"/>
+        <view class="shop-info">
+          <view class="shop-name-row">
+            <text class="shop-name">{{item.name}}</text>
+            <text class="shop-distance">{{item.distance}}km</text>
+          </view>
+          <view class="shop-rating">
+            <icon type="star" size="12" color="#FFD700"/>
+            <text>{{item.rating}}</text>
+          </view>
+          <view class="shop-tags">
+            <text class="tag" a:for="{{item.tags}}" a:for-item="tag">{{tag}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热门车型 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="title">热门车型</text>
+      <text class="more" onTap="onMoreModels">更多</text>
+    </view>
+    <view class="model-list">
+      <view class="model-item" a:for="{{hotModels}}" onTap="onModelTap" data-id="{{item.id}}">
+        <image src="{{item.image}}" mode="aspectFill"/>
+        <view class="model-info">
+          <text class="model-name">{{item.name}}</text>
+          <text class="model-price">¥{{item.price}}/天起</text>
+          <text class="model-shops">{{item.shopCount}}家店铺可租</text>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

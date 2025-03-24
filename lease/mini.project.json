@@ -1,3 +1,7 @@
 {
-  "format": 2
+  "format": 2,
+  "npm": {
+    "enable": true,
+    "packagePath": "./node_modules"
+  }
 }
